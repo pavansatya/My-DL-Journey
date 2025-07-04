@@ -1,0 +1,54 @@
+There are three variations of Gradient descent, which differ in how much data we use to 
+compute the gradient of the objective function. Depending on the amount of data, we make
+a trade off between the accuracy of the parameter update and the time it takes to perform an update
+
+
+🔹 Case 1: Batch Gradient Descent (Vanilla GD)
+All 50 data points are used together as one big batch.
+
+Forward pass on all 50 → compute loss → compute gradients → update weights once.
+
+✅ Weights are updated once per epoch.
+
+🔹 Case 2: Stochastic Gradient Descent (SGD)
+Each data point is treated as a separate batch of size 1.
+
+For every data point:
+
+Forward → loss → backward → update weights.
+
+✅ Weights are updated 50 times (once per data point).
+
+🔹 Case 3: Mini-Batch Gradient Descent
+Suppose you split the 50 points into batches of size 10.
+
+You'll have 5 mini-batches per epoch.
+
+✅ Weights are updated 5 times per epoch.
+
+| Batch Size         | # Updates in 1 Epoch |
+| ------------------ | -------------------- |
+| 50 (full batch)    | 1                    |
+| 1 (SGD)            | 50                   |
+| 10 (mini-batch)    | 5                    |
+| Any batch size `b` | `50 / b`             |
+
+* Batch GD is faster compared to Stochastic GD as it takes only no. of epochs times
+while Stocastic takes (* n) times. n - no. of parameters
+
+* Stocastic converges faster which means it gives better results compared to Batch GD.
+
+* SGD is both good and bad. Good because it helps the algorithm to move out pf local minima
+and reach global minima. Bad because it gives you approximate value but not exact value as it 
+does in Batch GD (with more epochs)
+
+while choosing the optimizer and adjusting the parameter batch_size:
+
+You don’t choose between “SGD” and “mini-batch GD” by picking different optimizers
+- you use the same SGD optimizer and just control batch_size.
+
+
+* this is how you call a optimzer with custom value.
+
+import torch.optim as optim
+optimizer = optim.Adam(model.parameters())  # defaults to lr=0.001

@@ -1,0 +1,27 @@
+There are many ways to solve overfitting when we are using neural networks.
+
+1) Adding more data using techniques like adding more rows or data augmentation.
+
+2) Reducing the model complexity using techniques like droput layers, early stopping and Regularization (L1, L2, L1 + L2)
+* L2 is used in 99% of cases
+
+Lets talk about regularisation.  What Regularization Does:
+When you add a regularization term (like L1 or L2) to the loss function, the model learns to prefer smaller weights during training — 
+not because it’s told to, but because smaller weights reduce the total loss.
+
+Increasing the loss via a penalty term "nudges" the model away from large weights during training by modifying the gradient.
+The optimization process then naturally reduces weight magnitudes to minimize total loss, effectively regularizing the model.
+
+w = w(1−2ηλ)−η⋅ ∂w/∂Lossdata
+
+The model may initially assign large weights to some nodes (neurons) because those weights help minimize the data loss (i.e., fit the training data).
+But once we add a regularization term, the model starts to see that large weights increase the total loss.
+
+So, during training, the optimizer adjusts the weights downward, finding a better balance between:
+
+Fitting the data well, and Keeping the weights small to avoid the regularization penalty.
+​
+ 
+​
+
+

@@ -1,0 +1,61 @@
+How does one fine tune hyperparameters?
+
+1) By modifying the no. of hidden layers.
+2) By modifying no. of neurons per layer.
+3) By updating the learning rate.
+4) By choosing the required optimizer depending of the data
+5) By changing the batch_size.
+6) By using appropriate activation function.
+7) By choosing how many no. of epochs we want to train our data on.
+
+Problems with Neural Networks :
+
+Vanishing and Expoding GDs -
+
+1) right weight initialization
+2) Activation function
+3) Batch Normalization
+4) Gradient clipping (used for exploding gradients)
+
+Not enough data - 
+
+1) Transfer learning
+2) Unsupervised pre-training
+
+Slow training -
+
+1) Different Optimizers
+2) Learning rate scheduler
+
+Over fitting -
+
+1) L1/L2 regularization
+2) Dropouts
+
+
+Early stopping: 
+
+- Now, lets talk about early stopping for a bit. This parameter helps us to stop the model from train further after it has seen 
+the lowest loss in validating or training data (these are fine-tuned).
+
+Feature-scaling techniques:
+
+- Techniques like Standardization or Normalization are important because, they help our model to converge on the loss or else it will oscillate.
+
+Dropouts:
+
+- In a deep neural network, we have big chance of over-fitting. To avoid this we drop out (randomly stop using some nodes for every epoch). 
+So literally, neural network architecture changes for every epoch.
+
+- Remember how different decision trees are trained and combined together and uses the average value to find the output. That is how exactly drop out 
+works. 
+
+practical tips and tricks on choosing dropout value - 
+
+1) If model is overfitting increase p value. If model is underfitting decrease p value. 
+2) Start with the last layer first then move to the middle layers.
+3) In CNNs choose between 0.4 - 0.5 and in RNN between 0.2 - 0.3 for better results. For ANNs you can choose 0.1 - 0.5.
+
+Apart from delay in convergence and varying gradient descent due to change in loss function it becomes difficult to track those. 
+
+

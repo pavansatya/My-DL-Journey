@@ -1,0 +1,102 @@
+If we do not use activation functions then the models only gives us values for binary classification or regression tasks.
+Simply saying, it is just a one big linear function with out any proper activation. As activation brings non-linearity.
+
+Qualities of a good activation function:
+
+1) Activation function should be non-linear.
+2) It should be differentiable (not mandatory, as relu is not differentiable).
+3) It should be computatioanlly inexpensive.
+4) It should be 0 centered and normalized (tan h).
+5) It should be non-saturating (should not squeeze functions in one range).
+
+
+- Sigmoid activation function:
+
+values lies between 0 to 1. if x is snall then tends towards 1 and vice-a-versa
+
+* Used on the output layers when working with binary classification tasks.
+* It is differentiable
+
+* It has vanishing gradient problem as the weight becomes same when weighted sum is more.
+* Computationally expensive
+* It is non-zero centered means its output is always positive, causing all activations and gradients to be positive, which:
+
+1) Can slow down learning
+2) Introduce bias in weight updates
+3) Make optimization less efficient in deep networks
+4) That's why sigmoid is rarely used in hidden layers today — it's mostly used only in output layers for binary classification.
+
+
+- Tanh activation function:
+
+values lies between -1 to 1. if x keeps on increasing value tends to 1 and vice-a-versa
+
+1) Non-linear
+2) Differentiable
+3) zero-centered (training is faster)
+
+* Vanishing gradient problem is still there and computatioanlly expensive.
+
+- ReLU activation function:
+
+* Though is seems like linear. It is actually non-linear.
+* Non saturating in +ve regression
+* Computationally inexpensive and converges faster.
+
+* Not zero centered
+main problem is dying relu happens when weighted sum at that node is less than 0.
+
+
+- Leaky ReLU:
+
+Leaky ReLU is a variant of the ReLU activation function that allows a small, non-zero gradient when the input is negative.
+
+Because standard ReLU can lead to the dying ReLU problem — where neurons get stuck outputting zero and stop learning.
+
+Leaky ReLU fixes that by ensuring:
+
+There’s always some gradient (even for negative inputs)
+
+So neurons won’t die — they can recover and keep learning
+
+sample code in pyTorch:
+
+import torch.nn as nn
+activation = nn.LeakyReLU(negative_slope=0.01)
+
+* Non saturated
+* easily computed
+* No dying relu problem
+* zero centered 
+
+
+For 0 weight initialization, there will not be any change for tanh and relu activation functions. The model performs terribly.
+But when we are using sigmoid activation it is gonna work like a line, still performs terribly.
+
+
+| Name                     | Best For         | Formula (Simplified)                | Purpose                         |
+| ------------------------ | ---------------- | ----------------------------------- | ------------------------------- |
+| **Xavier/Glorot**        | Sigmoid, tanh    | $\frac{1}{\sqrt{n_{in} + n_{out}}}$ | Balances input/output variance  |
+| **He Initialization**    | ReLU, Leaky ReLU | $\frac{2}{\sqrt{n_{in}}}$           | Preserves ReLU variance         |
+| **LeCun Initialization** | SELU             | $\frac{1}{\sqrt{n_{in}}}$           | Ideal for self-normalizing nets |
+| **Orthogonal**           | RNNs, LSTMs      | Uses orthogonal matrix              | Keeps gradient flow consistent  |
+
+*** Do not initialise your weights using either small random values or larger ones, neither zero nor non zero constant same value.  
+
+Then how should be initialize them?
+Keras initializes the weights automatically depending on the activation function that we choose.
+
+| Activation Function  | Default Weight Initializer            | Reason                                             |
+| -------------------- | ------------------------------------- | -------------------------------------------------- |
+| `relu`, `leaky_relu` | **He uniform (`he_uniform`)**         | Preserves variance for ReLU (non-negative outputs) |
+| `tanh`, `sigmoid`    | **Glorot uniform (`glorot_uniform`)** | Balances input/output variance                     |
+| `selu`               | **LeCun normal (`lecun_normal`)**     | Supports self-normalization                        |
+| *none specified*     | **Glorot uniform** (default fallback) | Safe general-purpose choice                        |
+
+
+
+| Initializer      | Distribution | Formula                                                                                                          | Best for        |
+| ---------------- | ------------ | ---------------------------------------------------------------------------------------------------------------- | --------------- |
+| `He_uniform`     | Uniform      | $\mathcal{U}(-\sqrt{\frac{6}{n}}, \sqrt{\frac{6}{n}})$                                                           | ReLU, LeakyReLU |
+| `He_normal`      | Normal       | $\mathcal{N}(0, \frac{2}{n})$                                                                                    | ReLU, LeakyReLU |
+| `Glorot_uniform` | Uniform      | $\mathcal{U}(-\sqrt{\frac{6}{n_{\text{in}} + n_{\text{out}}}}, \sqrt{\frac{6}{n_{\text{in}} + n_{\text{out}}}})$ | tanh, sigmoid   |

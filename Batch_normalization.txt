@@ -1,0 +1,20 @@
+Batch-normalization is a algorithmic method which makes the training of the Deep Neural Networks faster and more stable.
+
+It consists of normalizing activation vectors from hidden layers using the mean and variance of the current batch. This normalization step is applied right before (or right after) the non-linear function. 
+
+| Criteria                     | Normalization (MinMax)    | Standardization (Z-score)       |
+| ---------------------------- | ------------------------- | ------------------------------- |
+| Output range                 | \[0, 1] (or \[-1, 1])     | Mean = 0, Std = 1               |
+| Sensitive to outliers        | ✅ Yes                     | ❌ Less sensitive                |
+| Assumes Gaussian input?      | ❌ No                      | ✅ Ideally yes                   |
+| Best for                     | Bounded data, images, KNN | Linear models, SVM, neural nets |
+| Keeps shape of distribution? | ❌ No                      | ✅ Yes                           |
+
+
+Internal co-variate shift - This phenomenon happens in deep neural networks quite often. Consider a sub neural network and its inputs are none other than, outputs of
+the neural network upto that particular point. Considering this the training happens every single time as the inputs keep on varying. 
+
+Batch Normalization (BN) stabilizes this by keeping the activations at each layer on a consistent scale by normalizing them.
+
+
+

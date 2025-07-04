@@ -1,0 +1,19 @@
+What is the Vanishing Gradient Problem?
+
+During backpropagation, gradients (i.e., the error signal used to update weights) are computed via the chain rule — multiplying derivatives from one layer to the next.
+
+In deep networks (lots of layers), especially with certain activation functions (like sigmoid or tanh), these derivatives are often fractions < 1.
+
+So as you multiply more and more of them across layers, the gradient shrinks exponentially.
+
+By the time it reaches the earlier layers, the gradient is almost zero → no weight updates → network can't learn effectively.
+
+| Parameter         | Too Small                       | Too Large                                  |
+| ----------------- | ------------------------------- | ------------------------------------------ |
+| **# Layers**      | Can't capture complex patterns  | Vanishing gradients, overfitting           |
+| **# Neurons**     | Can't represent enough features | Redundant or inactive neurons, overfitting |
+| **Learning Rate** | No progress (too slow)          | Divergence or oscillations                 |
+| **Batch Size**    | Noisy updates                   | Slow updates, poor generalization          |
+
+
+* Change the activation function to relu or use early stopping. 

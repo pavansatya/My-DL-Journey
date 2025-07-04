@@ -1,0 +1,38 @@
+Loss function is a method of evaluating how well your algorithm is modelling on your dataset.
+
+
+| Aspect                   | Loss Function                      | Evaluation Metric        |
+| ------------------------ | ---------------------------------- | ------------------------ |
+| Purpose                  | Train the model (optimize weights) | Evaluate performance     |
+| Usage                    | During training (via backprop)     | On validation/test set   |
+| Requirement              | Must be differentiable             | Doesn’t have to be       |
+| Example (Classification) | Cross-entropy                      | Accuracy, Precision, AUC |
+| Example (Regression)     | MSE, MAE                           | MAE, R², RMSE            |
+
+How loss fucntion works in a regression task:
+
+So, basically when we predict a value, there is some difference between actual and predicted. We take the squared value of it i.e. MSE.
+Now, the weights and bias of this forward propogation are adjusted using gradient descent and then again new prediction comes. We do this until
+we get a minimum loss. 
+
+Depending on the problem, there are different losses. These are the most used ones in respective tasks:
+
+Regression - MSE, MAE, Kuber loss
+Classification - binary crossentropy, categorical crossentropy, hinge loss (SVM)
+Auto encoders - KL Divergence
+GAN - discriminatory loss, min max gan loss
+Object detection - Focal loss
+Embedding - Triplet loss 
+
+What is the difference between cost function and loss function?
+
+Loss function is calculated on one sample. Meanwhile, cost function is calculated on whole batch.
+It is the average loss for the whole batch of samples (parameters). 
+
+# One important that we should remember while choosing activation function and loss function for regression tasks is 
+the last layer should have linear activation function and a loss function of MSE/MAE.
+
+# Another important tthing to remember, for multiclass classification tasks i.e. softmax regression.
+The activation function is softmax and loss function sparse categorical crossentropy (more classes) cause it 
+does not require additional step of OHE. 
+
