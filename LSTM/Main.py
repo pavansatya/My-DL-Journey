@@ -12,7 +12,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 
-data = pd.read_csv("MicrosoftStock.csv")
+data = pd.read_csv("/Users/krishvenigalla/Desktop/Deep Learning/My-DL-Journey/LSTM/MicrosoftStock.csv")
 print(data.head())
 print(data.info())
 print(data.describe())
@@ -141,4 +141,4 @@ plt.title("Our Stock Predictions")
 plt.xlabel("Date")
 plt.ylabel("Close Price")
 plt.legend()
-plt.show()
+plt.show() 
